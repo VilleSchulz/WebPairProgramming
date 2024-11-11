@@ -7,7 +7,7 @@
   "price": "1,995"
 }
 */
- 
+
 let tourArray = [];
 let nextId = 1;
 
@@ -63,12 +63,24 @@ const deleteOneById = (id) => {
     const initialLenght = tourArray.length;
     tourArray = tourArray.filter((tour) => tour.id !== Number(id));
     return tourArray.length < initialLenght;
-  } else return false;
+  } else {
+    return false;
+  }
 };
 if (require.main === module) {
-  let result = addOne("Paris in 7 Days Tour", "Paris is synonymous.", "https://www.course-api.com/images/tours/tour-1.jpeg", 500);
+  let result = addOne(
+    "Paris in 7 Days Tour",
+    "Paris is synonymous.",
+    "https://www.course-api.com/images/tours/tour-1.jpeg",
+    500
+  );
   console.log(result);
-  result = addOne("Finland in 7 Days Tour", "Finland is synonymous.", "https://www.course-api.com/images/tours/tour-2.jpeg", 800);
+  result = addOne(
+    "Finland in 7 Days Tour",
+    "Finland is synonymous.",
+    "https://www.course-api.com/images/tours/tour-2.jpeg",
+    800
+  );
   console.log(result);
   console.log(`getAll called: ${getAll()}`);
   console.log(`findById called: ${findById(2)}`);
@@ -77,7 +89,7 @@ if (require.main === module) {
       name: "Italy in 7 Days Tour",
       info: "Paris is synonymous.",
       image: "https://www.course-api.com/images/tours/tour-2.jpeg",
-      price: 800
+      price: 800,
     })}`
   );
   console.log(`findById called after item updated: ${findById(2)}`);

@@ -1,17 +1,18 @@
 const express = require("express");
 const app = express();
-const userRouter = require('./routes/userRouter');
-const tourRouter = require('./routes/tourRouter')
+const userRouter = require('./routes/userRoute');
+const tourRouter = require('./routes/tourRoute')
 
 
-
+const morgan = require('morgan');
+app.use(morgan('tiny'));
 // Middleware to parse JSON
 app.use(express.json());
 
-app.use('/users',userRouter);
+app.use('/api/users',userRouter);
 
 
-app.use('/tours',tourRouter)
+app.use('/api/tours',tourRouter)
 
 const port = 4000;
 // Start the server

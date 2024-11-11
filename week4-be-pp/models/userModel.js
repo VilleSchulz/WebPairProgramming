@@ -1,7 +1,5 @@
 // data model
 
-const { urlencoded } = require("express");
-
 /*
 {
   "name": "Matti Seppänen",
@@ -93,17 +91,15 @@ const updateOneById = (id, updatedData) => {
   }
   return false;
 };
-
-const deleteOneById = (id) => {
+function deleteOneById(id) {
   const user = findById(id);
   if (user) {
-    const initialLenght = userArray.length;
+    const initialLength = userArray.length;
     userArray = userArray.filter((user) => user.id !== Number(id));
-    return tourArray.length < initialLenght;
-  } else {
-    return false;
+    return userArray.length < initialLength; // Indicate successful deletion if the length has decreased
   }
-};
+  return false; // Return false if the item was not found
+}
 
 module.exports = {
   getAll,

@@ -9,19 +9,19 @@ const {
     createTour,
     updateTour,
     deleteTour,
-  } = require("./controllers/tourControllers"); 
+  } = require("../controllers/tourControllers"); 
   // GET /tours
-  app.get("/", getAllTours);
+  router.get("/", getAllTours);
   
   // POST /tours
-  app.post("/", createTour);
+  router.post("/", createTour);
   
   // GET /tours/:tourId
-  app.get("/:tourId", getTourById);
+  router.get("/:tourId", getTourById);
   
   // PUT /tours/:tourId
-  app.put("/:tourId", updateTour);
+  router.put("/:tourId", updateTour);
   
   // DELETE /tours/:tourId
-  app.delete("/:tourId", deleteTour);
-  
+  router.delete("/:tourId", deleteTour);
+  module.exports = router;
