@@ -24,14 +24,14 @@ const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
 
 return(
-  <div className="registration-form">
-    <form onSubmit={(e)=>{e.preventDefault(); addNewUser(name,email,password)}}>
+
+    <form className="registration-form" onSubmit={(e)=>{e.preventDefault(); addNewUser(name,email,password)}}>
       <input type="text" value ={name} placeholder="give name" onChange={ (e)=>setName(e.target.value)}></input>
       <input type="text" value ={email}  placeholder="email" onChange={ (e)=>setEmail(e.target.value)}></input>
       <input type="text" value ={password} placeholder="password" onChange={ (e)=>setPassword(e.target.value)}></input>
-      <button type ="submit">register</button>
+      <button className ="register-button" type ="submit">register</button>
     </form>
-  </div>);
+ );
 };
 
 export default Registration;
