@@ -121,6 +121,23 @@ p {
 }
 /*  global classes */
 
+.not-interested{
+  margin-left:0.5rem;
+  padding: 1rem;
+  border-radius: 2rem;
+  border: none;
+ display: flex;
+ justify-content: center;
+ align-items:center ;
+  height: 1rem;
+  width: 2rem;
+  background-color:  hsl(184, 65%, 59%);
+
+}
+.not-interested:active{
+  scale: 110%;
+ 
+}
 .btn {
   text-transform: uppercase;
   background: var(--clr-primary-5);
@@ -264,6 +281,10 @@ About
 Services
 ===============
 */
+.service-card-object{
+  display: flex;
+}
+
 .services {
   background: var(--clr-grey-10);
 }
@@ -321,7 +342,9 @@ Services
 Featured Tours
 ===============
 */
-
+.tour-card-object{
+  display: flex;
+}
 .tour-card {
   transition: var(--transition);
   background: var(--clr-grey-10);

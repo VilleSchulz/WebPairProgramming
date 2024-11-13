@@ -1,21 +1,35 @@
-import {useState} from 'react';
-import { services } from '../data'
-import Title from './Title'
-import Service from './Service'
+import { useState } from "react";
+import { services } from "../data";
+import Title from "./Title";
+import Service from "./Service";
 
 const Services = () => {
-const [serviceData, setServicesData] = useState(services)
+  const [serviceData, setServicesData] = useState(services);
+
+  const updateData = (removedService) => {
+    const updatedServiceData = serviceData.filter(
+      (service) => service.id !== removedService.id
+    );
+    setServicesData(updatedServiceData);
+  };
 
   return (
-    <section className='section services' id='services'>
-      <Title title='our' subTitle='services' />
+    <section className="section services" id="services">
+      <Title title="our" subTitle="services" />
 
-      <div className='section-center services-center'>
+      <div className="section-center services-center">
         {serviceData.map((service) => {
-          return <Service {...service} key={service.id} />
+          return (
+            <div className="service-card-object">
+              <Service {...service} key={service.id} />
+              <button className='not-interested' onClick={() => updateData(service)}>
+                x
+              </button>
+              </div>
+          );
         })}
       </div>
     </section>
-  )
-}
-export default Services
+  );
+};
+export default Services;
