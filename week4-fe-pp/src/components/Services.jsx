@@ -20,8 +20,8 @@ const Services = () => {
       <div className="section-center services-center">
         {serviceData.map((service) => {
           return (
-            <div className="service-card-object">
-              <Service {...service} key={service.id} />
+            <div className="service-card-object" key={service.id}>
+              <Service {...service}  />
               <button className='not-interested' onClick={() => updateData(service)}>
                 x
               </button>

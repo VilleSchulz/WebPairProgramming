@@ -20,8 +20,8 @@ const Tours = () => {
       <div className="section-center featured-center">
         {toursData.map((tour) => {
           return (
-            <div className="tour-card-object">
-              <Tour {...tour} key={tour.id} />
+            <div className="tour-card-object" key={tour.id}>
+              <Tour {...tour}  />
               <button className='not-interested' onClick={() => updateData(tour)}>x</button>
             </div>
           );
