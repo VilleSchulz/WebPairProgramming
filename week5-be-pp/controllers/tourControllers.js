@@ -42,7 +42,7 @@ const getTourById = async (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .json({ message: "Failed to retrieve car", error: error.message });
+      .json({ message: "Failed to retrieve tour", error: error.message });
   }
 };
 
@@ -69,8 +69,8 @@ const updateTour = async (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .json({ message: "Failed to update car", error: error.message });
-    console.error(error);
+      .json({ message: "Failed to update tour", error: error.message });
+  
   }
 };
 
@@ -94,7 +94,7 @@ const deleteTour = async (req, res) => {
     res
       .status(500)
       .json({ message: "Failed to delete tour", error: error.message });
-    console.error(error);
+    
   }
 };
 
