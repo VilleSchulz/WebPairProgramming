@@ -15,7 +15,7 @@ const jobSchema = new mongoose.Schema({
 });
 
 //add  virtual field id
-jobSchema.set("toJSON", {
+jobSchema.set("toJSON", { // this code adds extra  parameter to json response: in this case it adds _id value to id. so its easier to use in code rather than _id.
   virtuals: true,
   transform: (doc, ret) => {
     ret.id = ret._id;

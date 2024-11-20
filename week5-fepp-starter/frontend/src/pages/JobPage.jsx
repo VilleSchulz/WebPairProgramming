@@ -6,30 +6,59 @@ const JobPage = () => {
   const { id } = useParams();
   const [job, setJob] = useState(null);
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
 
   const deleteJob = async () => {
-    console.log(JobPage);
+    try {
+      const response = await fetch(`${apiUrl}/${id}`, { method: "DELETE" });
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch job details. Status: ${response.status}`
+        );
+      }
+      if (response.status === 204) {
+        console.log("Job deleted successfully");
+        navigate("/"); // Redirect to the homepage after deletion
+      } 
+     
+
+    } catch (error) {
+      console.error(error);
+      setError(error.message);
+    }
   };
 
-  if (!job) {
-    return <div>Loading...</div>;
-  }
+  
 
   const getJobInfo = async (id) => {
     try {
       const response = await fetch(`${apiUrl}/${id}`);
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch job details. Status: ${response.status}`
+        );
+      }
       const data = await response.json();
       console.log("Job details:", data);
-      setJob(data)
+      setJob(data);
     } catch (error) {
       console.error(error);
+      setError(error.message);
     }
   };
 
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   useEffect(() => {
-    console.log("Use efect triggered",id)
+    console.log("Use efect triggered", id);
     getJobInfo(id);
   }, []);
+
+  if (!job) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="job-details">

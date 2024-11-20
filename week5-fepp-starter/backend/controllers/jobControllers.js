@@ -1,3 +1,4 @@
+
 const Job = require("../models/jobModel");
 const mongoose = require("mongoose");
 
@@ -14,7 +15,7 @@ const getAllJobs = async (req, res) => {
 // POST /jobs
 const createJob = async (req, res) => {
   // console.log(req.body );
-  
+
   try {
     const newJob = await Job.create({ ...req.body });
     res.status(201).json(newJob);
@@ -89,10 +90,58 @@ const deleteJob = async (req, res) => {
   }
 };
 
+// Get jobs by type
+getJobsByType = async (req, res) => {
+  try {
+    const jobs = await Job.find({ type: req.params.type });
+    res.status(200).json(jobs);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Search jobs by location
+getJobsByLocation = async (req, res) => {
+  try {
+    const jobs = await Job.find({ location: req.params.location });
+    res.status(200).json(jobs);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Filter jobs by salary range
+filterJobsBySalary = async (req, res) => {
+  const minSalary = Number(req.query.min) || 0;
+  const maxSalary = Number(req.query.max) || Infinity;
+
+  try {
+    const jobs = await Job.find({
+      salary: { $gte: minSalary, $lte: maxSalary },
+    });
+    res.status(200).json(jobs);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+countJobsByType = async (req, res) => {
+  try {
+    const count = await Job.countDocuments({ type: req.params.type });
+    res.status(200).json({ type: req.params.type, count });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getAllJobs,
   getJobById,
   createJob,
   updateJob,
   deleteJob,
+  getJobsByType,
+  getJobsByLocation,
+  filterJobsBySalary,
+  countJobsByType,
 };

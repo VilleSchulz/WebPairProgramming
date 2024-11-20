@@ -13,11 +13,12 @@ const EditJobPage = () => {
   const [contactPhone, setContactPhone] = useState("");
   const [location, setLocation] = useState("");
   const [salary, setSalary] = useState("");
+  const apiUrl = "http://localhost:4000/api/jobs";
 
   useEffect(() => {
     const fetchJob = async () => {
       try {
-        const res = await fetch(`http://localhost:4000/api/jobs/${id}`, {
+        const res = await fetch(`${apiUrl}/${id}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -44,10 +45,48 @@ const EditJobPage = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
+    const updatedJob = {
+      company: {
+        name: companyName,
+        contactEmail: contactEmail,
+        contactPhone: contactPhone
+      },
+      title: title,
+      type: type,
+      description: description,
+      location: location,
+      salary: salary
+    };
+    const updateJob = async () => {
+
+      try {
+        console.log("trying to update ",id)
+        const response = await fetch(`${apiUrl}/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedJob),
+        });
+        if (!response.ok) {
+          throw new Error("Failed to update job");
+        }
+        const data = await response.json();
+        console.log("Job updated: ", data);
+        navigate(`/jobs/${id}`);
+      } catch (error) {
+        console.log("Error fetching data", error);
+      }
+    };
+    updateJob();
+
     console.log("EditJobPage");
   };
 
   const cancelEdit = () => {
+    fetchJob();
+    navigate(`/jobs/${id}`);
+
     console.log("cancelEdit");
   };
 
