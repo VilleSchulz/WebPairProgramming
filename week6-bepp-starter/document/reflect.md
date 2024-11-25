@@ -1,0 +1,1 @@
+ i had to modify tour controller and have to add user_id to req parameters.
