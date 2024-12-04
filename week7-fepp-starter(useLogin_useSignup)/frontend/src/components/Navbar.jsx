@@ -13,7 +13,7 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
 
         {isAuthenticated ? (
           <>
-            <Link to="/add-job">Add job</Link>
+            <Link to="/jobs/add-job">Add job</Link>
             <span>{JSON.parse(sessionStorage.getItem("user")).email}</span>
             <button onClick={handleClick}>Log out</button>
           </>

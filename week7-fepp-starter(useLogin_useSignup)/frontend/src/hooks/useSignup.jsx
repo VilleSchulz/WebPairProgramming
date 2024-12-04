@@ -22,6 +22,8 @@ export default function useSignup(url) {
     }
 
     sessionStorage.setItem("user", JSON.stringify(user));
+    console.log(user);
+
     setIsLoading(false);
   };
 

@@ -8,7 +8,7 @@ const Home = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await fetch("api/jobs");
+        const response = await fetch("/api/jobs");
         if (!response.ok) {
           throw new Error("could not fetch the data from that resource");
         }

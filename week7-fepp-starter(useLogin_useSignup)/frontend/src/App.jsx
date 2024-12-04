@@ -1,40 +1,38 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useState } from "react";
+
 // pages & components
+import Navbar from "./components/Navbar";
 import Home from "./pages/HomePage";
 import AddJobPage from "./pages/AddJobPage";
-import Navbar from "./components/Navbar";
-import NotFoundPage from "./pages/NotFoundPage";
 import JobPage from "./pages/JobPage";
 import EditJobPage from "./pages/EditJobPage";
-import Signup from "./pages/Signup";
+import NotFoundPage from "./pages/NotFoundPage";
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    const user = JSON.parse(sessionStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem("user"));
     return user && user.token ? true : false;
   });
+  
+
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar
-          setIsAuthenticated={setIsAuthenticated}
-          isAuthenticated={isAuthenticated}
-        />
+      <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>
         <div className="content">
           <Routes>
             <Route path="/" element={<Home />} />
-
+            <Route path="/jobs/:id" element={<JobPage isAuthenticated={isAuthenticated} />} />
             <Route
-              path="/add-job"
-              element={isAuthenticated ? <AddJobPage isAuthenticated={isAuthenticated} /> : <Navigate to="/" />}
-            />
-            <Route path="*" element={<NotFoundPage />} />
-            <Route path="/jobs/:id" element={<JobPage />} />
+              path="/jobs/add-job"
+              element={isAuthenticated ? <AddJobPage /> : <Navigate to="/signup" />}
+            />           
             <Route
               path="/edit-job/:id"
-              element={isAuthenticated ? <EditJobPage /> : <Navigate to="/" />}
+              element={isAuthenticated ? <EditJobPage /> : <Navigate to="/signup" />}
             />
             <Route
               path="/signup"
@@ -56,6 +54,7 @@ const App = () => {
                 )
               }
             />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
       </BrowserRouter>
