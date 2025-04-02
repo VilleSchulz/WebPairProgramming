@@ -10,10 +10,12 @@ function Hero() {
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae explicabo
       debitis est autem dicta.
     </p>
-    <a href="#tours" className={styles.heroBtn}>
-      explore tours
-    </a>
+   
   </div>
+  <button> <a href="#tours" className={styles.heroBtn}>
+      explore tours
+    </a></button>
+ 
 </section>
 
   );

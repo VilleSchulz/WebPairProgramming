@@ -86,7 +86,8 @@ describe("Given there are initially some jobs saved", () => {
 
   it("should return one job by ID when GET /api/jobs/:id is called", async () => {
     const job = await Job.findOne();
-    await api.get("/api/jobs/" + job._id)
+    await api
+      .get("/api/jobs/" + job._id)
       .set("Authorization", "bearer " + token)
       .expect(200)
       .expect("Content-Type", /application\/json/);
